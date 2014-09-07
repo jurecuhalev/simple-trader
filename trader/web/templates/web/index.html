@@ -1,0 +1,37 @@
+{% extends "base.html" %}{% load url from future %}
+
+{% block contents %}
+<div class="col-md-12">
+	<h1>Simple Trader - Homepage</h1>
+</div>
+
+<div class="col-md-10">
+	<h2>Current price: <strong>{{ current_price }}</strong></h2>
+</div>
+
+<div class="col-md-10">
+	<h2>Active Orders</h2>
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Customer Email</th>
+				<th>Amount</th>
+				<th>Quality</th>
+				<th>Actions</th>
+			</tr>
+		</thead>
+		{% for order in active_order_lisit %}
+			<tr>
+				<td>{{ order.email }}</td>
+				<td>{{ order.amount }}</td>
+				<td>{{ order.quality }}</td>
+				<td><a href="#">View order</a></td>
+			</tr>
+		{% endfor %}
+	</table>
+</div>
+
+<div class="col-md-12">
+	<a href="{% url 'order_add' %}" class="btn btn-primary">Add new order</a>
+</div>
+{% endblock %}

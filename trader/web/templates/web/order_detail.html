@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block contents %}
+<div class="col-md-12">
+	<h1>Order number: {{ order.id }}</h1>
+</div>
+
+<div class="col-md-12">
+	<dl>
+		<dt>Email:</dt>
+		<dd>{{ order.email }}</dd>
+
+		<dt>Amount:</dt>
+		<dd>{{ order.amount }}</dd>
+
+		<dt>Quality:</dt>
+		<dd>{{ order.get_quality_display }}</dd>
+	</dl>
+
+	<a href="/">Home page</a>
+</div>
+{% endblock %}
