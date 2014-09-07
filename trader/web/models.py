@@ -1,4 +1,5 @@
 from django.db import models
+from django.core.exceptions import ValidationError
 from django.core.urlresolvers import reverse
 
 TRADEORDER_QUALITY_CHOICES = (
@@ -17,6 +18,10 @@ class TradeOrder(models.Model):
 
     def __unicode__(self):
         return "{0} ordered {1} of {2}".format(self.email, self.amount, self.get_quality_display())
+
+    def save(self, *args, **kwargs):
+        if self.amount < 1:
+            raise ValidationError("Order amount must be more than 0")
 
     def get_absolute_url(self):
         return reverse('order_view', args=[self.id])
