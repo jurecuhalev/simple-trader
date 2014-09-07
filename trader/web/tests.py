@@ -29,6 +29,9 @@ class HomepageTest(TestCase):
 
 		order.delete()
 
+	def test_api_price_unavailable(self):
+		pass
+
 class OrderAddTest(TestCase):
 	def setUp(self):
 		self.client = Client()
@@ -42,6 +45,11 @@ class OrderAddTest(TestCase):
 		response = self.client.get('/add/')
 		self.assertIsInstance(response.context['form'], OrderAddForm)
 
+	def test_form_add(self):
+		pass
+
+	def test_form_with_gmail_fails(self):
+		pass
 
 class OrderDetailTest(TestCase):
 	def setUp(self):
@@ -53,3 +61,7 @@ class OrderDetailTest(TestCase):
 	def test_do_not_display_expired_trade(self):
 		pass
 
+class TradeOrderModelTest(TestCase):
+
+	def test_require_one_or_more_order_amount(self):
+		pass
