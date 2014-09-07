@@ -23,5 +23,7 @@ class TradeOrder(models.Model):
         if self.amount < 1:
             raise ValidationError("Order amount must be more than 0")
 
+        super(TradeOrder, self).save(*args, **kwargs)
+
     def get_absolute_url(self):
         return reverse('order_view', args=[self.id])

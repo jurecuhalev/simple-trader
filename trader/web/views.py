@@ -10,10 +10,14 @@ from web.models import TradeOrder
 from web.forms import OrderAddForm
 
 def index(request):
-    active_order_lisit = TradeOrder.objects.all()
+    active_order_lisit = TradeOrder.objects.filter(expired=False)
 
-    remote_api = requests.get('http://localhost:8000/price_api/')
-    if remote_api.status_code == 200:
+    try:
+        remote_api = requests.get('http://localhost:8000/price_api/')
+    except requests.exceptions.ProtocolError:
+        remote_api = None
+    
+    if remote_api and remote_api.status_code == 200:
         remote_data = json.loads(remote_api.content)
         current_price = remote_data.get('price')
     else:
@@ -43,7 +47,7 @@ def order_add(request):
     })
 
 def order_view(request, order_id):
-    order = get_object_or_404(TradeOrder, id=order_id)
+    order = get_object_or_404(TradeOrder, id=order_id, expired=False)
 
     return render(request, 'web/order_detail.html', {
         'order': order
