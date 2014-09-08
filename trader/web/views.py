@@ -15,13 +15,16 @@ def index(request):
     try:
         remote_api = requests.get('http://localhost:8000/price_api/')
     except requests.packages.urllib3.exceptions.ProtocolError:
-        remote_api = None
+        remote_api = 'Not working'
     
-    if remote_api and remote_api.status_code == 200:
-        remote_data = json.loads(remote_api.content)
-        current_price = remote_data.get('price')
+    if remote_api == 'Not working':
+        current_price = 'Not working'
     else:
-        current_price = 'Unavailable'
+        if remote_api.status_code == 200:
+            remote_data = json.loads(remote_api.content)
+            current_price = remote_data.get('price')
+        else:
+            current_price = 'Unavailable'
 
     return render(request, 'web/index.html', {
         'active_order_lisit': active_order_lisit,
