@@ -25,7 +25,7 @@
 				<td>{{ order.email }}</td>
 				<td>{{ order.amount }}</td>
 				<td>{{ order.quality }}</td>
-				<td><a href="#">View order</a></td>
+				<td><a href="{% url 'order_view' order.id %}">View order</a></td>
 			</tr>
 		{% endfor %}
 	</table>

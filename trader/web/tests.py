@@ -44,6 +44,9 @@ class HomepageTest(TestCase):
 		self.assertContains(response, 'Unavailable')
 
 
+	def tearDown(self):
+		pass
+
 class OrderAddTest(TestCase):
 	def setUp(self):
 		self.client = Client()
