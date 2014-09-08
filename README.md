@@ -4,7 +4,11 @@ Example Application to help with introduction to Django Testing
 Instalation
 ---
 
-Unzip the folder and create new virtualenv:
+If you need to setup your basic python environment:
+
+	sudo apt-get install python-pip python-virtualenv python-dev
+
+From inside simple-trader folder, create new virtualenv:
 
 	virtualenv env
 
