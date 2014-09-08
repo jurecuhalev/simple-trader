@@ -138,7 +138,7 @@ class OrderDetailTest(TestCase):
 	def setUp(self):
 		self.client = Client()
 
-	def test_display_trade(self):
+	def test_display_order(self):
 		order = TradeOrder.objects.create(
 			email='user@example.com', 
 			amount=10,
@@ -163,9 +163,6 @@ class OrderDetailTest(TestCase):
 		self.assertEquals(response.status_code, 404)
 
 		order.delete()
-
-	def tearDown(self):
-		TradeOrder.objects.all().delete()
 
 class TradeOrderModelTest(TestCase):
 
