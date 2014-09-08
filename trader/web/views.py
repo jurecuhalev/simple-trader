@@ -14,7 +14,7 @@ def index(request):
 
     try:
         remote_api = requests.get('http://localhost:8000/price_api/')
-    except requests.exceptions.ProtocolError:
+    except requests.packages.urllib3.exceptions.ProtocolError:
         remote_api = None
     
     if remote_api and remote_api.status_code == 200:

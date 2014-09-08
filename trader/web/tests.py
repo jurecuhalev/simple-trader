@@ -32,6 +32,9 @@ class HomepageTest(TestCase):
 	def test_api_price_unavailable(self):
 		pass
 
+	def tearDown(self):
+		pass
+
 class OrderAddTest(TestCase):
 	def setUp(self):
 		self.client = Client()
