@@ -32,10 +32,10 @@ class HomepageTest(TestCase):
 	def test_api_not_working(self):
 		pass
 
-	def test_api_price_unavailable_handled(self, mock_requests):
+	def test_api_price_unavailable_handled(self):
 		pass
 
-	def test_api_price_available(self, mock_requests):
+	def test_api_price_available(self):
 		pass
 
 	def tearDown(self):
