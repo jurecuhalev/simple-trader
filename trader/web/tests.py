@@ -1,4 +1,4 @@
-from mock import call, patch
+from mock import patch
 
 from django.test import TestCase
 from django.test.client import Client
@@ -35,6 +35,10 @@ class HomepageTest(TestCase):
 
 		order.delete()
 
+	def test_api_not_working(self):
+		response = self.client.get('/')
+		self.assertContains(response, 'Current price: <strong>Not working</strong>')
+
 	@patch('web.views.requests')
 	def test_api_price_unavailable_handled(self, mock_requests):
 		mock_requests.get.return_value.status_code = 403
@@ -43,6 +47,14 @@ class HomepageTest(TestCase):
 
 		self.assertContains(response, 'Unavailable')
 
+	@patch('web.views.requests')
+	def test_api_price_available(self, mock_requests):
+		mock_requests.get.return_value.status_code = 200
+		mock_requests.get.return_value.content = '{"price": 9}'
+
+		response = self.client.get('/')
+
+		self.assertContains(response, 'Current price: <strong>9</strong>')
 
 	def tearDown(self):
 		pass
@@ -62,6 +74,7 @@ class OrderAddTest(TestCase):
 		from web.forms import OrderAddForm
 		
 		response = self.client.get('/add/')
+
 		self.assertIsInstance(response.context['form'], OrderAddForm)
 
 	def test_form_add(self):
