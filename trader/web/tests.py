@@ -29,7 +29,13 @@ class HomepageTest(TestCase):
 
 		order.delete()
 
-	def test_api_price_unavailable(self):
+	def test_api_not_working(self):
+		pass
+
+	def test_api_price_unavailable_handled(self, mock_requests):
+		pass
+
+	def test_api_price_available(self, mock_requests):
 		pass
 
 	def tearDown(self):
@@ -54,14 +60,20 @@ class OrderAddTest(TestCase):
 	def test_form_with_gmail_fails(self):
 		pass
 
+	def test_form_with_zero_amount(self):
+		pass
+
+	def test_homepage_do_not_list_expired_order(self):
+		pass
+
 class OrderDetailTest(TestCase):
 	def setUp(self):
 		self.client = Client()
 
-	def test_display_trade(self):
+	def test_display_order(self):
 		pass
 
-	def test_do_not_display_expired_trade(self):
+	def test_do_not_display_expired_order(self):
 		pass
 
 class TradeOrderModelTest(TestCase):
